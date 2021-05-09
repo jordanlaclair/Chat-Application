@@ -1,0 +1,37 @@
+.outerContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	background-color: #1a1a1d;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	background: #202020;
+	width: 35%;
+}
+
+@media (max-width: 480px) {
+	.outerContainer {
+		height: 100vh;
+	}
+
+	.container {
+		width: 100vw;
+		height: 100vh;
+	}
+}
+
+@media (min-width: 480px) {
+	.container {
+		width: 100vw;
+		height: 100vh;
+	}
+	#input {
+		width: 100vw;
+		max-height: 30vh;
+	}
+}

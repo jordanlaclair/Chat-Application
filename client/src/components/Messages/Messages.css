@@ -1,0 +1,11 @@
+.messages {
+	padding: 3% 0;
+	overflow: auto;
+	flex: auto;
+}
+::-webkit-scrollbar {
+	display: none;
+}
+* {
+	-ms-overflow-style: none;
+}

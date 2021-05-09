@@ -9,6 +9,7 @@ const { removeUser, addUser, getUsersInRoom, getUser } = require("./users");
 const PORT = process.env.PORT || 5000;
 
 const router = require("./router");
+const { isObject } = require("util");
 
 const app = express();
 //creates http server on your computer
@@ -45,6 +46,10 @@ socketio.on("connection", (socket) => {
 		//joins a room
 		socket.join(user.room);
 
+		socketio
+			.to(user.room)
+			.emit("roomData", { room: user.room, users: getUsersInRoom(user.room) });
+
 		callback();
 	});
 	//waiting for front end
@@ -53,13 +58,27 @@ socketio.on("connection", (socket) => {
 		//gets this specific socket instance id from up above
 		const user = getUser(socket.id);
 		socketio.to(user.room).emit("message", { user: user.name, text: message });
+		socketio
+			.to(user.room)
+			.emit("roomData", { room: user.room, users: getUsersInRoom(user.room) });
 
 		callback();
 	});
 
 	//when the user disconnects from that socket
 	socket.on("disconnect", () => {
-		console.log("User has left!");
+		const user = removeUser(socket.id);
+
+		if (user) {
+			socketio.to(user.room).emit("message", {
+				user: "Admin",
+				text: `${user.name} has left.`,
+			});
+			socketio.to(user.room).emit("roomData", {
+				room: user.room,
+				users: getUsersInRoom(user.room),
+			});
+		}
 	});
 });
 

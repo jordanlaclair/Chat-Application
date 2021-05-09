@@ -1,0 +1,72 @@
+.form {
+	display: flex;
+	border-top: 2px solid #696969;
+}
+
+.input {
+	border: none;
+	border-radius: 0;
+	font-family: "Fira Sans", sans-serif;
+	padding: 5%;
+	width: 80vw;
+	height: 10vh;
+	font-size: 1.2em;
+	background: #484848;
+	color: white;
+}
+
+.input::placeholder {
+	color: #c8c8c8;
+}
+
+input:-ms-input-placeholder {
+	/* Internet Explorer 10-11 */
+	color: #c8c8c8;
+}
+
+input::-ms-input-placeholder {
+	/* Microsoft Edge */
+	color: #c8c8c8;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+	outline: none;
+}
+
+.sendButton {
+	color: #fff !important;
+	font-size: 1.2em;
+	border-radius: 0;
+
+	text-decoration: none;
+	font-family: "Fira Sans", sans-serif;
+	cursor: pointer;
+	background: #2979ff;
+	padding: 20px;
+	display: inline-block;
+	border: none;
+	width: 20%;
+}
+
+@media (max-width: 480px) {
+	.input {
+		width: 75%;
+		height: 10vh;
+	}
+	.sendButton {
+		width: 35%;
+		height: 10vh;
+	}
+}
+
+@media (min-width: 480px) {
+	.input {
+		padding: 0 45px;
+		height: 10vh;
+	}
+	.sendButton {
+		width: 20vw;
+	}
+}
