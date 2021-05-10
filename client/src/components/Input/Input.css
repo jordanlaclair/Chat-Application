@@ -52,11 +52,22 @@ select:focus {
 
 @media (max-width: 480px) {
 	.input {
-		width: 75%;
+		width: 75vw;
 		height: 10vh;
 	}
 	.sendButton {
 		width: 35%;
+		height: 10vh;
+	}
+}
+
+@media (max-width: 320px) {
+	.input {
+		width: 75vw;
+		height: 10vh;
+	}
+	.sendButton {
+		width: 30vw;
 		height: 10vh;
 	}
 }
@@ -68,5 +79,16 @@ select:focus {
 	}
 	.sendButton {
 		width: 20vw;
+	}
+}
+
+@media (min-width: 1080px) {
+	.input {
+		padding: 0 45px;
+		height: 10vh;
+		width: 90vw;
+	}
+	.sendButton {
+		width: 10vw;
 	}
 }

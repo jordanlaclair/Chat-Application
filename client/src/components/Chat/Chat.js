@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import InfoBar from "../InfoBar/InfoBar";
 import Input from "../Input/Input";
 import Messages from "../Messages/Messages";
-
 import queryString from "query-string";
 import io from "socket.io-client";
 import "./Chat.css";
@@ -15,6 +14,8 @@ const Chat = ({ location }) => {
 	const [name, setName] = useState("");
 	const [messages, setMessages] = useState([]);
 	const [message, setMessage] = useState("");
+	const [users, setUsers] = useState("");
+
 	const ENDPOINT = "localhost:5000";
 
 	useEffect(() => {
@@ -37,6 +38,9 @@ const Chat = ({ location }) => {
 
 	//for handling messages
 	useEffect(() => {
+		socket.on("roomData", ({ users }) => {
+			setUsers(users);
+		});
 		//listener for the message emitter (the props of this listener are from the emitter)
 		socket.on("message", (message) => {
 			setMessages([...messages, message]);
@@ -55,15 +59,17 @@ const Chat = ({ location }) => {
 	console.log(message, messages);
 
 	return (
-		<div className="container">
-			<InfoBar className="infobar" room={room} />
-			<Messages className="messages" messages={messages} name={name} />
-			<div id="input">
-				<Input
-					message={message}
-					setMessage={setMessage}
-					sendMessage={sendMessage}
-				/>
+		<div className="outerContainer">
+			<div className="container">
+				<InfoBar users={users} className="infobar" room={room} />
+				<Messages className="messages" messages={messages} name={name} />
+				<div id="input">
+					<Input
+						message={message}
+						setMessage={setMessage}
+						sendMessage={sendMessage}
+					/>
+				</div>
 			</div>
 		</div>
 	);
