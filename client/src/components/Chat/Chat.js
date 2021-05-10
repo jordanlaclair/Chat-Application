@@ -16,19 +16,23 @@ const Chat = ({ location }) => {
 	const [message, setMessage] = useState("");
 	const [users, setUsers] = useState("");
 
-	const ENDPOINT = "localhost:5000";
+	const ENDPOINT = "https://chat--application-react.herokuapp.com/";
 
 	useEffect(() => {
 		//query string returns an object from the url of location.search
 		const { name, room } = queryString.parse(location.search);
 
 		socket = io(ENDPOINT);
-
+		//joins the user according to the url
 		setName(name);
 		setRoom(room);
 
-		socket.emit("join", { name, room }, () => {});
-
+		socket.emit("join", { name, room }, (error) => {
+			if (error) {
+				alert(error);
+			}
+		});
+		//disconnect the user
 		return () => {
 			socket.emit("disconnect");
 			//turns this one instance of the client socket off (since the component was unmounted)
@@ -43,9 +47,9 @@ const Chat = ({ location }) => {
 		});
 		//listener for the message emitter (the props of this listener are from the emitter)
 		socket.on("message", (message) => {
-			setMessages([...messages, message]);
+			setMessages((messages) => [...messages, message]);
 		});
-	}, [messages]);
+	}, []);
 
 	const sendMessage = (e) => {
 		e.preventDefault();
@@ -55,8 +59,6 @@ const Chat = ({ location }) => {
 			});
 		}
 	};
-
-	console.log(message, messages);
 
 	return (
 		<div className="outerContainer">

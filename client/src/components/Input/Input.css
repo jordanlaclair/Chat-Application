@@ -1,5 +1,6 @@
 .form {
 	display: flex;
+	width: 100vw;
 	border-top: 2px solid #696969;
 }
 
@@ -39,7 +40,6 @@ select:focus {
 	color: #fff !important;
 	font-size: 1.2em;
 	border-radius: 0;
-
 	text-decoration: none;
 	font-family: "Fira Sans", sans-serif;
 	cursor: pointer;
@@ -67,7 +67,7 @@ select:focus {
 		height: 10vh;
 	}
 	.sendButton {
-		width: 30vw;
+		width: 25vw;
 		height: 10vh;
 	}
 }

@@ -8,13 +8,17 @@ const addUser = ({ id, name, room }) => {
 	const existingUser = users.find((user) => {
 		user.room === room && user.name === name;
 	});
-
+	//if the user exists already
 	if (existingUser) {
 		return { error: "Username is currently taken." };
 	}
-
+	//if the user did not enter a room or name
+	if (!name || !room) return { error: "Username and room are required." };
+	//user object
 	const user = { id, name, room };
+	//pushes user onto users list
 	users.push(user);
+	//returns the user name
 	return { user };
 };
 

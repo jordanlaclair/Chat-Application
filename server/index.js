@@ -9,12 +9,11 @@ const { removeUser, addUser, getUsersInRoom, getUser } = require("./users");
 const PORT = process.env.PORT || 5000;
 
 const router = require("./router");
-const { isObject } = require("util");
 
 const app = express();
 //creates http server on your computer
 const server = http.createServer(app);
-
+//instance of socket
 const socketio = require("socket.io")(server, {
 	cors: {
 		origin: "*",
@@ -23,7 +22,9 @@ const socketio = require("socket.io")(server, {
 		credentials: true,
 	},
 });
-//instance of socket
+
+app.use(cors());
+app.use(router);
 
 //client side socket when the user connects
 socketio.on("connection", (socket) => {
@@ -58,9 +59,6 @@ socketio.on("connection", (socket) => {
 		//gets this specific socket instance id from up above
 		const user = getUser(socket.id);
 		socketio.to(user.room).emit("message", { user: user.name, text: message });
-		socketio
-			.to(user.room)
-			.emit("roomData", { room: user.room, users: getUsersInRoom(user.room) });
 
 		callback();
 	});
@@ -81,9 +79,6 @@ socketio.on("connection", (socket) => {
 		}
 	});
 });
-
-app.use(cors());
-app.use(router);
 
 server.listen(PORT, () => {
 	console.log(`Server has started on port ${PORT}`);
