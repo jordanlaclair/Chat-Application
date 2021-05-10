@@ -15,4 +15,4 @@ Mobile Compatible 📱 🚀
 
 ## Live Demo
 
-[Live Link](https://chat-app-f704b.web.app)
+🟢 [Live Link](https://chat-app-f704b.web.app) 🟢
