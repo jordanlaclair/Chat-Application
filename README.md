@@ -6,6 +6,10 @@ A fun site you can share with your friends to privately chat. Simply enter your 
 
 Mobile Compatible 📱 🚀
 
+## Live Demo
+
+[Live Link](https://chat-app-f704b.web.app)
+
 ## Technologies
 
 - Node.js + Socket.io
