@@ -8,10 +8,10 @@ Mobile Compatible 📱 🚀
 
 ## Technologies
 
+- React-Router ⚛️
 - Node.js + Socket.io
-- React
-- React-Router
-- Heroku
+- React ⚛️
+- Heroku 👾
 
 ## Live Demo
 
